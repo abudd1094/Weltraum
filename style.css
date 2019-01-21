@@ -1,0 +1,16 @@
+body {
+  background-color: black;
+  margin: 0 auto 0 auto;
+}
+
+#title {
+  display: block;
+  margin: 10px auto 10px auto;
+}
+
+canvas {
+  display: block;
+  margin: 0 auto 0 auto;
+  padding: none;
+  border: 5px white solid;
+}
