@@ -17,8 +17,22 @@ var frame = 0
 // Enemies
 function spawnEnemy() {
   if(frame > 0 && frame % 100 === 0) {
-    var enemy = new Enemy(width/2 - 15, -50, 30, 30, 5);
+    var enemy = new Enemy(width/2 - 15, -50, 30, 30, 5, 1);
     enemies.push(enemy)
+  }
+}
+
+function shootEnemy() {
+  for (var i = 0; i < enemies.length; i++) {
+    for (var j = 0; j < playershots.length; j++) {
+      if (enemies[i].y === playershots[j].y) { //correct for detecting more than one pixel , no it's just y
+        enemies.splice(i,1)
+        playershots.splice(j,1)
+        console.log('hit')
+        shootEnemy()
+        return 
+      }
+    }
   }
 }
 
@@ -28,7 +42,7 @@ function updateEverything() {
     frame++
   }
   bg.update()
-  mainplayer.damage()
+  mainplayer.damage() 
   spawnEnemy()
   for (var i = 0; i < enemies.length; i++) { //enemies array
     enemies[i].update();
@@ -51,13 +65,14 @@ function drawEverything() {
 }
 var animationId
 function animation(){
+  shootEnemy()
   updateEverything()
   drawEverything()
   animationId = window.requestAnimationFrame(animation)
 }
 animation()
 
-// Player 
+// Player Movements
 window.onkeydown = function(event) {
   event.preventDefault() // stops the button scrolling the page
   if (frame > 0) {
@@ -81,11 +96,12 @@ window.onkeyup = function(event) {
 }
 
 // Game Over
-function endGame() {
-  isGameStart = false;
-        (function() {console.log('end game')})()
-        frame = 0
-}
+// function endGame() {
+//   isGameStart = false;
+//   (function() {console.log('end game')})()
+//   bg.vy = 0.9
+//   frame = 0;
+// }
 
 // Menu
 var startbutton = document.getElementById("startbutton");
@@ -93,5 +109,19 @@ startbutton.onclick = function() {
   isGameStart = true
   startbutton.classList.remove("visible")
   startbutton.classList.add("hidden")
+  scorebutton.classList.remove("visible")
+  scorebutton.classList.add("hidden")
+  pornbutton.classList.remove("visible")
+  pornbutton.classList.add("hidden")
   bg.vy = 3;
+}
+var scorebutton = document.getElementById("scorebutton");
+scorebutton.onclick = function() {
+  scorebutton.classList.remove("visible")
+  scorebutton.classList.add("hidden")
+}
+var pornbutton = document.getElementById("pornbutton");
+pornbutton.onclick = function() {
+  pornbutton.classList.remove("visible")
+  pornbutton.classList.add("hidden")
 }
