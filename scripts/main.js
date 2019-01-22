@@ -8,6 +8,7 @@ var bg = new Background('images/bg1.jpg', 852, 480, 0, 0, 0, 0.9)
 var title = new Title('images/weltraumTitle.png', 326.5, 100, 7, 150)
 
 var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 450)
+var enemies = [];
 
 var isGameStart = false
 var frame = 0
@@ -15,6 +16,10 @@ var frame = 0
 // Main Animation
 function updateEverything() {
   bg.update()
+  spawnEnemy()
+  for (var i = 0; i < enemies.length; i++) { //enemies array
+    enemies[i].update();
+  }
   if (isGameStart) {
     frame++
   }
@@ -24,6 +29,9 @@ function drawEverything() {
   bg.draw(ctx)
   title.draw(ctx, frame)
   mainplayer.draw(ctx)
+  for (var i = 0; i < enemies.length; i++) { //enemies array
+    enemies[i].draw(ctx);
+  }
 }
 
 var animationId
@@ -34,7 +42,10 @@ function animation(){
 }
 animation()
 
-// Player Movements and Actions
+// Actions
+
+
+// Player 
 window.onkeydown = function(event) {
   event.preventDefault() // stops the button scrolling the page
   if (frame > 0) {
@@ -46,14 +57,14 @@ window.onkeydown = function(event) {
       mainplayer.moveRight()    
     } else if(event.keyCode == 37) { // left
       mainplayer.moveLeft()   
-    } else if(event.keyCode == 32) {
-      var playershot = new Shot(mainplayer.x + 26, mainplayer.y, 3, 11, -5)
-      var actionAnimation = function() {
-        playershot.update()
-        playershot.draw(ctx)
-        window.requestAnimationFrame(actionAnimation)
-      }
-      actionAnimation()
+    // } else if(event.keyCode == 32) {
+    //   var playershot = new Shot(mainplayer.x + 26, mainplayer.y, 3, 11, -5)
+    //   var actionAnimation = function() {
+    //     playershot.update()
+    //     playershot.draw(ctx)
+    //     window.requestAnimationFrame(actionAnimation)
+    //   }
+    //   actionAnimation()
     }
   } 
 }
@@ -62,8 +73,13 @@ window.onkeyup = function(event) {
   mainplayer.sx = 51.8;
 }
 
-// Enemy Movements and Actions
-
+// Enemies
+function spawnEnemy() {
+  if(frame > 0 && frame % 100 === 0) {
+    var enemy = new Enemy(width/2 - 15, -50, 30, 30, 5);
+    enemies.push(enemy)
+  }
+}
 
 // Menu
 var startbutton = document.getElementById("startbutton");

@@ -33,4 +33,9 @@ class Player {
     if (bg.vy < 8)
     bg.moveUp(ctx)
   }
+  //damage(ctx) {
+  //  if (enemy.y == this.y) {
+  //    this.health -= 1;
+  //  }
+//  }
 }
