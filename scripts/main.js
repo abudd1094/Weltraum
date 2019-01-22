@@ -8,6 +8,7 @@ var bg = new Background('images/bg1.jpg', 852, 480, 0, 0, 0, 0.9)
 var title = new Title('images/weltraumTitle.png', 326.5, 100, 7, 150)
 
 var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 450)
+var playershots = [];
 var enemies = [];
 
 var isGameStart = false
@@ -15,13 +16,16 @@ var frame = 0
 
 // Main Animation
 function updateEverything() {
+  if (isGameStart) {
+    frame++
+  }
   bg.update()
   spawnEnemy()
   for (var i = 0; i < enemies.length; i++) { //enemies array
     enemies[i].update();
   }
-  if (isGameStart) {
-    frame++
+  for (var i = 0; i < playershots.length; i++) { //player's shot array
+    playershots[i].update();
   }
 }
 function drawEverything() {
@@ -32,6 +36,9 @@ function drawEverything() {
   for (var i = 0; i < enemies.length; i++) { //enemies array
     enemies[i].draw(ctx);
   }
+  for (var i = 0; i < playershots.length; i++) { //player's shot array
+    playershots[i].draw(ctx);
+  }
 }
 
 var animationId
@@ -41,9 +48,6 @@ function animation(){
   animationId = window.requestAnimationFrame(animation)
 }
 animation()
-
-// Actions
-
 
 // Player 
 window.onkeydown = function(event) {
@@ -57,17 +61,13 @@ window.onkeydown = function(event) {
       mainplayer.moveRight()    
     } else if(event.keyCode == 37) { // left
       mainplayer.moveLeft()   
-    // } else if(event.keyCode == 32) {
-    //   var playershot = new Shot(mainplayer.x + 26, mainplayer.y, 3, 11, -5)
-    //   var actionAnimation = function() {
-    //     playershot.update()
-    //     playershot.draw(ctx)
-    //     window.requestAnimationFrame(actionAnimation)
-    //   }
-    //   actionAnimation()
+    } else if(event.keyCode == 32) {
+      var playershot = new Shot(mainplayer.x + 26, mainplayer.y, 3, 11, -5)
+      playershots.push(playershot)
     }
-  } 
-}
+  }
+} 
+
 window.onkeyup = function(event) {
   event.preventDefault()
   mainplayer.sx = 51.8;
@@ -80,6 +80,14 @@ function spawnEnemy() {
     enemies.push(enemy)
   }
 }
+
+// Actions
+// function spawnShot() {
+//   if(frame > 0 && event.keyCode == 32) {
+//     var playershot = new Shot(mainplayer.x + 26, mainplayer.y, 3, 11, -5)
+//     playershots.push(playershot)
+//   }
+// }
 
 // Menu
 var startbutton = document.getElementById("startbutton");
