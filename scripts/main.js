@@ -1,3 +1,4 @@
+// Variables
 var canvas = document.getElementById("gameboard")
 var ctx = canvas.getContext('2d')
 var width = canvas.width
@@ -5,10 +6,8 @@ var height = canvas.height
 
 var bg = new Background('images/bg1.jpg', 852, 480, 0, 0, 0, 0.9)
 var title = new Title('images/weltraumTitle.png', 326.5, 100, 7, 150)
-var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 450)
 
-//document.getElementById("start-button").onclick = function() {
-//  startGame();
+var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 450)
 
 var isGameStart = false
 var frame = 0
@@ -27,7 +26,6 @@ function drawEverything() {
   mainplayer.draw(ctx)
 }
 
-
 var animationId
 function animation(){
   updateEverything()
@@ -36,7 +34,7 @@ function animation(){
 }
 animation()
 
-//Movement Keys
+// Player Movements and Actions
 window.onkeydown = function(event) {
   event.preventDefault() // stops the button scrolling the page
   if (frame > 0) {
@@ -64,6 +62,9 @@ window.onkeyup = function(event) {
   mainplayer.sx = 51.8;
 }
 
+// Enemy Movements and Actions
+
+
 // Menu
 var startbutton = document.getElementById("startbutton");
 startbutton.onclick = function() {
@@ -72,5 +73,3 @@ startbutton.onclick = function() {
   startbutton.classList.add("hidden")
   bg.vy = 3;
 }
-
-//function startGame() {

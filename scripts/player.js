@@ -10,6 +10,7 @@ class Player {
     this.y = y
     this.width = 50
     this.height = 80
+    this.health = 3
   }
   draw(ctx) {
     ctx.drawImage(this.img, this.sx, this.sy, this.swidth, this.sheight, this.x, this.y, this.width, this.height)
