@@ -14,3 +14,24 @@ canvas {
   padding: none;
   border: 5px white solid;
 }
+
+/* Menu */
+.button {
+  border: none;
+  outline: none;
+  background-color: inherit;
+  color: white;
+  font-family: 'VT323', monospace;
+  font-size: 30px;
+  text-align: center;
+}
+.button:hover {
+  color: red;
+}
+
+#startbutton {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  top: 300px;
+}

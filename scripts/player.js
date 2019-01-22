@@ -12,13 +12,20 @@ class Player {
     this.height = 80
   }
   draw(ctx) {
-    // Clip the main spaceship (TODO: check if sy and sheight is correct)
     ctx.drawImage(this.img, this.sx, this.sy, this.swidth, this.sheight, this.x, this.y, this.width, this.height)
-    // ctx.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
   }
-
+  moveDown(ctx) {
+    mainplayer.y += 10
+  }
   moveLeft(ctx) {
-    this.y -= 1;
+    mainplayer.x -= 10   
+    mainplayer.sx = 0 
   }
-
+  moveRight(ctx) {
+    mainplayer.x += 10
+    mainplayer.sx = 105.3 
+  }
+  moveUp(ctx) {
+    mainplayer.y -= 10   
+  }
 }

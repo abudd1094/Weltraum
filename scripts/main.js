@@ -6,24 +6,34 @@ var height = canvas.height
 var bg = new Background('images/bg1.jpg', 852, 480, 0, 0, 0, 0.9)
 var title = new Title('images/weltraumTitle.png', 326.5, 100, 7, 100)
 var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 510)
+var playershot = new Shot(mainplayer.x, mainplayer.y, 4, 10, -2)
 
 //document.getElementById("start-button").onclick = function() {
 //  startGame();
 
+var isGameStart = false
+var frame = 0
+
+// Main Animation
 function updateEverything() {
   bg.update()
+  if (isGameStart) {
+    frame++
+  }
 }
 function drawEverything() {
   ctx.clearRect(0,0,width,height)
   bg.draw(ctx)
-  title.draw(ctx)
+  title.draw(ctx, frame)
   mainplayer.draw(ctx)
 }
 
+
+var animationId
 function animation(){
   updateEverything()
   drawEverything()
-  window.requestAnimationFrame(animation)
+  animationId = window.requestAnimationFrame(animation)
 }
 animation()
 
@@ -31,23 +41,32 @@ animation()
 window.onkeydown = function(event) {
   event.preventDefault() // stops the button scrolling the page
   if(event.keyCode == 40) { // down
-    mainplayer.y += 10
+    mainplayer.moveDown()
   } else if(event.keyCode == 38) { // up
-    mainplayer.y -= 10   
+    mainplayer.moveUp()  
   } else if(event.keyCode == 39) { // right 
-    mainplayer.x += 10
-    mainplayer.sx = 105.3    
+    mainplayer.moveRight()    
   } else if(event.keyCode == 37) { // left
-    mainplayer.x -= 10   
-    mainplayer.sx = 0     
-  } 
+    mainplayer.moveLeft()   
+  } else if(event.keyCode == 32) {
+    var playershot = new Shot(mainplayer.x + 26, mainplayer.y, 3, 11, -2)
+    var actionAnimation = function() {
+      playershot.update()
+      playershot.draw(ctx)
+      window.requestAnimationFrame(actionAnimation)
+    }
+    actionAnimation()
+  }
 }
-
 window.onkeyup = function(event) {
   event.preventDefault()
   mainplayer.sx = 51.8;
 }
 
+// Menu
+document.getElementById("startbutton");
+startbutton.onclick = function() {
+  isGameStart = true
+}
+
 //function startGame() {
-
-
