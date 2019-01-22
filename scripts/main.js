@@ -4,9 +4,8 @@ var width = canvas.width
 var height = canvas.height
 
 var bg = new Background('images/bg1.jpg', 852, 480, 0, 0, 0, 0.9)
-var title = new Title('images/weltraumTitle.png', 326.5, 100, 7, 100)
-var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 510)
-var playershot = new Shot(mainplayer.x, mainplayer.y, 4, 10, -2)
+var title = new Title('images/weltraumTitle.png', 326.5, 100, 7, 150)
+var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 450)
 
 //document.getElementById("start-button").onclick = function() {
 //  startGame();
@@ -40,23 +39,25 @@ animation()
 //Movement Keys
 window.onkeydown = function(event) {
   event.preventDefault() // stops the button scrolling the page
-  if(event.keyCode == 40) { // down
-    mainplayer.moveDown()
-  } else if(event.keyCode == 38) { // up
-    mainplayer.moveUp()  
-  } else if(event.keyCode == 39) { // right 
-    mainplayer.moveRight()    
-  } else if(event.keyCode == 37) { // left
-    mainplayer.moveLeft()   
-  } else if(event.keyCode == 32) {
-    var playershot = new Shot(mainplayer.x + 26, mainplayer.y, 3, 11, -2)
-    var actionAnimation = function() {
-      playershot.update()
-      playershot.draw(ctx)
-      window.requestAnimationFrame(actionAnimation)
+  if (frame > 0) {
+    if(event.keyCode == 40) { // down
+      mainplayer.moveDown()
+    } else if(event.keyCode == 38) { // up
+      mainplayer.moveUp()  
+    } else if(event.keyCode == 39) { // right 
+      mainplayer.moveRight()    
+    } else if(event.keyCode == 37) { // left
+      mainplayer.moveLeft()   
+    } else if(event.keyCode == 32) {
+      var playershot = new Shot(mainplayer.x + 26, mainplayer.y, 3, 11, -5)
+      var actionAnimation = function() {
+        playershot.update()
+        playershot.draw(ctx)
+        window.requestAnimationFrame(actionAnimation)
+      }
+      actionAnimation()
     }
-    actionAnimation()
-  }
+  } 
 }
 window.onkeyup = function(event) {
   event.preventDefault()
@@ -64,9 +65,12 @@ window.onkeyup = function(event) {
 }
 
 // Menu
-document.getElementById("startbutton");
+var startbutton = document.getElementById("startbutton");
 startbutton.onclick = function() {
   isGameStart = true
+  startbutton.classList.remove("visible")
+  startbutton.classList.add("hidden")
+  bg.vy = 3;
 }
 
 //function startGame() {

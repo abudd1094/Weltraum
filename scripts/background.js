@@ -22,6 +22,12 @@ class Background {
       this.y -= this.height;
     }
   }
+  moveUp(ctx) {
+    this.vy += 5
+  }
+  moveDown(ctx) {
+    this.vy -= 5
+  }
 }
 
 

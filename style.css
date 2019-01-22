@@ -32,6 +32,17 @@ canvas {
 #startbutton {
   position: absolute;
   left: 50%;
-  margin-left: -50px;
+  margin-left: -65px;
   top: 300px;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 2s linear;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1.2s, opacity 1.2s linear;
 }

@@ -9,7 +9,7 @@ class Title {
     this.height = height
   }
   draw(ctx, frame) {
-    var opacity = 1 - frame / 100
+    var opacity = 1 - frame / 80
     if (opacity > 0) {
       ctx.save()
       ctx.globalAlpha = opacity
