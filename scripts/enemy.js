@@ -1,11 +1,12 @@
 // Background Image Constructor
 class Enemy {
-  constructor(x, y, width, height, vy) {
+  constructor(x, y, width, height, vy, health) {
     this.x = x
     this.y = y
     this.width = width
     this.height = height
     this. vy = vy
+    this.health = health
   }
   draw(ctx) {
     ctx.fillStyle = "blue"

@@ -33,9 +33,17 @@ class Player {
     if (bg.vy < 8)
     bg.moveUp(ctx)
   }
-  //damage(ctx) {
-  //  if (enemy.y == this.y) {
-  //    this.health -= 1;
-  //  }
-//  }
+  damage(ctx) {
+    for (var i = 0; i < enemies.length; i++) {
+      if (this.health === 0) {
+        endGame();
+      } else if (enemies[i].y == this.y) {
+        this.health -= 1;
+        console.log(mainplayer.health)
+        
+      }
+      
+      
+    }
+  }
 }

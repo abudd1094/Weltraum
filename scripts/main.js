@@ -14,12 +14,21 @@ var enemies = [];
 var isGameStart = false
 var frame = 0
 
+// Enemies
+function spawnEnemy() {
+  if(frame > 0 && frame % 100 === 0) {
+    var enemy = new Enemy(width/2 - 15, -50, 30, 30, 5);
+    enemies.push(enemy)
+  }
+}
+
 // Main Animation
 function updateEverything() {
   if (isGameStart) {
     frame++
   }
   bg.update()
+  mainplayer.damage()
   spawnEnemy()
   for (var i = 0; i < enemies.length; i++) { //enemies array
     enemies[i].update();
@@ -40,7 +49,6 @@ function drawEverything() {
     playershots[i].draw(ctx);
   }
 }
-
 var animationId
 function animation(){
   updateEverything()
@@ -67,27 +75,17 @@ window.onkeydown = function(event) {
     }
   }
 } 
-
 window.onkeyup = function(event) {
   event.preventDefault()
   mainplayer.sx = 51.8;
 }
 
-// Enemies
-function spawnEnemy() {
-  if(frame > 0 && frame % 100 === 0) {
-    var enemy = new Enemy(width/2 - 15, -50, 30, 30, 5);
-    enemies.push(enemy)
-  }
+// Game Over
+function endGame() {
+  isGameStart = false;
+        (function() {console.log('end game')})()
+        frame = 0
 }
-
-// Actions
-// function spawnShot() {
-//   if(frame > 0 && event.keyCode == 32) {
-//     var playershot = new Shot(mainplayer.x + 26, mainplayer.y, 3, 11, -5)
-//     playershots.push(playershot)
-//   }
-// }
 
 // Menu
 var startbutton = document.getElementById("startbutton");
