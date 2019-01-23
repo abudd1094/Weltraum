@@ -1,4 +1,4 @@
-// Variables
+// Canvas & Background
 var canvas = document.getElementById("gameboard")
 var ctx = canvas.getContext('2d')
 var width = canvas.width
@@ -7,8 +7,9 @@ var height = canvas.height
 var bg = new Background('images/bg1.jpg', 852, 480, 0, 0, 0, 0.9)
 var title = new Title('images/weltraumTitle.png', 326.5, 100, 7, 150)
 
+// Game State
 var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 450)
-var playershots = [];
+var bullets = [];
 var enemies = [];
 
 var isGameStart = false
@@ -22,12 +23,23 @@ function spawnEnemy() {
   }
 }
 
+function hasHit(box1, box2) {
+  var box1Bottom = box1.x + box1.width
+  var box1Left = box1.y + box1.height  
+  var box2Bottom = box2.x + box2.width
+  var box2Left = box2.y + box2.height  
+  
+  if(box1Bottom > box2.x && box2Bottom > box1.x && 
+    box1Left > box2.y && box2Left > box1.y) return true;
+  else return false
+}
+
 function shootEnemy() {
   for (var i = 0; i < enemies.length; i++) {
-    for (var j = 0; j < playershots.length; j++) {
-      if (enemies[i].y === playershots[j].y) { //correct for detecting more than one pixel , no it's just y
+    for (var j = 0; j < bullets.length; j++) {
+      if (hasHit(enemies[i], bullets[j])) { 
         enemies.splice(i,1)
-        playershots.splice(j,1)
+        bullets.splice(j,1)
         console.log('hit')
         shootEnemy()
         return 
@@ -36,7 +48,7 @@ function shootEnemy() {
   }
 }
 
-// Main Animation
+// Animation Render Loop
 function updateEverything() {
   if (isGameStart) {
     frame++
@@ -47,8 +59,8 @@ function updateEverything() {
   for (var i = 0; i < enemies.length; i++) { //enemies array
     enemies[i].update();
   }
-  for (var i = 0; i < playershots.length; i++) { //player's shot array
-    playershots[i].update();
+  for (var i = 0; i < bullets.length; i++) { //player's shot array
+    bullets[i].update();
   }
 }
 function drawEverything() {
@@ -59,8 +71,8 @@ function drawEverything() {
   for (var i = 0; i < enemies.length; i++) { //enemies array
     enemies[i].draw(ctx);
   }
-  for (var i = 0; i < playershots.length; i++) { //player's shot array
-    playershots[i].draw(ctx);
+  for (var i = 0; i < bullets.length; i++) { //player's shot array
+    bullets[i].draw(ctx);
   }
 }
 var animationId
@@ -85,8 +97,8 @@ window.onkeydown = function(event) {
     } else if(event.keyCode == 37) { // left
       mainplayer.moveLeft()   
     } else if(event.keyCode == 32) {
-      var playershot = new Shot(mainplayer.x + 26, mainplayer.y, 3, 11, -5)
-      playershots.push(playershot)
+      var playerbullet = new Shot(mainplayer.x + 26, mainplayer.y, 3, 11, -5)
+      bullets.push(playerbullet)
     }
   }
 } 
@@ -111,17 +123,10 @@ startbutton.onclick = function() {
   startbutton.classList.add("hidden")
   scorebutton.classList.remove("visible")
   scorebutton.classList.add("hidden")
-  pornbutton.classList.remove("visible")
-  pornbutton.classList.add("hidden")
   bg.vy = 3;
 }
 var scorebutton = document.getElementById("scorebutton");
 scorebutton.onclick = function() {
   scorebutton.classList.remove("visible")
   scorebutton.classList.add("hidden")
-}
-var pornbutton = document.getElementById("pornbutton");
-pornbutton.onclick = function() {
-  pornbutton.classList.remove("visible")
-  pornbutton.classList.add("hidden")
 }

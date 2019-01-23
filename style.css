@@ -43,13 +43,6 @@ canvas {
   top: 350px;
 }
 
-#pornbutton {
-  position: absolute;
-  left: 50%;
-  margin-left: -60px;
-  top: 400px;
-}
-
 .visible {
   visibility: visible;
   opacity: 1;
