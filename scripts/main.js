@@ -16,9 +16,16 @@ var isGameStart = false
 var frame = 0
 
 // Enemies
+// function spawnEnemy() {
+//   if(frame > 0 && frame % 100 === 0) {
+//     var enemy = new Enemy(width/2 - 15, -50, 30, 30, 5, 1);
+//     enemies.push(enemy)
+//   }
+// }
+
 function spawnEnemy() {
   if(frame > 0 && frame % 100 === 0) {
-    var enemy = new Enemy(width/2 - 15, -50, 30, 30, 5, 1);
+    var enemy = new Enemy('images/enemies/enemy2.png', width/2 - 25, -60, 30, 30, 5)
     enemies.push(enemy)
   }
 }
@@ -54,9 +61,9 @@ function updateEverything() {
     frame++
   }
   bg.update()
-  mainplayer.damage() 
+  mainplayer.damage()
   spawnEnemy()
-  for (var i = 0; i < enemies.length; i++) { //enemies array
+  for (var i = 0; i < enemies.length; i++) { // updating enemies array one by one
     enemies[i].update();
   }
   for (var i = 0; i < bullets.length; i++) { //player's shot array
@@ -68,7 +75,7 @@ function drawEverything() {
   bg.draw(ctx)
   title.draw(ctx, frame)
   mainplayer.draw(ctx)
-  for (var i = 0; i < enemies.length; i++) { //enemies array
+  for (var i = 0; i < enemies.length; i++) { //drawing enemies array one by one
     enemies[i].draw(ctx);
   }
   for (var i = 0; i < bullets.length; i++) { //player's shot array
