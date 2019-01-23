@@ -3,6 +3,14 @@ body {
   margin: 0 auto 0 auto;
 }
 
+#titlehtml {
+  position: absolute;
+  left: 38.35%;
+  margin-left: -65px;
+  top: 200px;
+  width: 42%;
+}
+
 #title {
   display: block;
   margin: 10px auto 10px auto;
@@ -64,9 +72,14 @@ canvas {
 }
 
 #healthdisplay {
-  left: 28%;
+  left: 27%;
 }
 
 #playerscore {
-  right: 28%;
+  right: 27%;
+}
+
+#currentlevel {
+  left: 27%;
+  top: 10px;
 }
