@@ -34,6 +34,7 @@ function updateEverything() {
   
   mainplayer.damage() // main player items
   timeScore();
+  
 
   spawnEnemy() // generate basic enemies, move to enemy generator
   for (var i = 0; i < enemies.length; i++) { // updating enemies array one by one
@@ -52,7 +53,11 @@ function drawEverything() {
   title.draw(ctx, frame)
 
   lives.draw(ctx) // ?????? WHY ARENT THEY UPDATING????
-  score.draw(ctx)
+  // score.draw(ctx)
+
+  // Draw score
+  ctx.fillText("Score: " + mainplayer.score, 290, 592)
+
   level.draw(ctx)
 
   mainplayer.draw(ctx)
@@ -110,12 +115,15 @@ window.onkeyup = function(event) {
 }
 
 // Game Over
-// function endGame() {
-//   isGameStart = false;
-//   (function() {console.log('end game')})()
-//   bg.vy = 0.9
-//   frame = 0;
-// }
+function endGame() {
+  isGameStart = false;
+  bg.vy = 0.9
+  frame = 0;
+  startbutton.classList.remove("hidden")
+  startbutton.classList.add("visible")
+  scorebutton.classList.remove("hidden")
+  scorebutton.classList.add("visible")
+}
 
 // Menu
 var startbutton = document.getElementById("startbutton");
@@ -125,12 +133,6 @@ startbutton.onclick = function() {
   startbutton.classList.add("hidden")
   scorebutton.classList.remove("visible")
   scorebutton.classList.add("hidden")
-  // playerscore.classList.remove("hidden")
-  // playerscore.classList.add("visible")
-  // healthdisplay.classList.remove("hidden")
-  // healthdisplay.classList.add("visible")
-  // currentlevel.classList.remove("hidden")
-  // currentlevel.classList.add("visible")
   bg.vy = 4;
 }
 var scorebutton = document.getElementById("scorebutton");

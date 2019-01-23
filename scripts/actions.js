@@ -18,7 +18,22 @@ function timeScore() {
 }
 
 // COLLISIONS
-
+// function collision() {
+//   for (var i = 0; i < enemies.length; i++) {
+//     var playerfront = mainplayer.x + mainplayer.width
+//     var shipfront = enemies[i].x + enemies[i].width
+//     var playerside = mainplayer.y + mainplayer.height
+//     var shipside = enemies[i].y + enemies[i].height
+//     if (playerfront > enemies[i].x && shipfront > mainplayer.x && 
+//       playerside > enemies[i].y && shipside > mainplayer.y) {
+//       var xplosion1 = new Xplosion(enemies[i].x + 7, enemies[i].y + 10, 32, 32) // XPLOSION 1
+//       xplosions1.push(xplosion1)
+//       xplode1 = true;
+//       mainplayer.health -= enemies[i].damage
+//       enemies.splice(i,1)
+//     }
+//   }
+// }
 
 // PLAYER ATTACKS
 function shootEnemy() {
@@ -31,6 +46,8 @@ function shootEnemy() {
         mainplayer.score += enemies[i].points
         enemies.splice(i,1)
         bullets.splice(j,1)
+        shootEnemy()
+        return 
       }
     }
   }
