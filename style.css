@@ -53,3 +53,20 @@ canvas {
   opacity: 0;
   transition: visibility 0s 1.2s, opacity 1.2s linear;
 }
+
+/* HUD in game */
+.hud {
+  position: absolute;
+  top: 585px;
+  color: white;
+  font-family: 'VT323', monospace;
+  font-size: 20px
+}
+
+#healthdisplay {
+  left: 28%;
+}
+
+#playerscore {
+  right: 28%;
+}

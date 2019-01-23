@@ -1,4 +1,4 @@
-// Canvas & Background
+// Canvas
 var canvas = document.getElementById("gameboard")
 var ctx = canvas.getContext('2d')
 var width = canvas.width
@@ -11,43 +11,37 @@ var title = new Title('images/weltraumTitle.png', 326.5, 100, 7, 150)
 var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 450)
 var bullets = [];
 var enemies = [];
+var xplosions1 = [];
 
 var isGameStart = false
 var frame = 0
 
-// Enemies
-// function spawnEnemy() {
-//   if(frame > 0 && frame % 100 === 0) {
-//     var enemy = new Enemy(width/2 - 15, -50, 30, 30, 5, 1);
-//     enemies.push(enemy)
-//   }
-// }
+var xplode1 = false
 
+// ***** IN GAME INFO ******
+var healthdisplay = document.getElementById("healthdisplay")
+var playerscore = document.getElementById("playerscore")
+
+// ***** ENEMIES *****
 function spawnEnemy() {
   if(frame > 0 && frame % 100 === 0) {
-    var enemy = new Enemy('images/enemies/enemy2.png', width/2 - 25, -60, 30, 30, 5)
-    enemies.push(enemy)
+    var xcor = Math.random() * (width - 20)
+    var enemy2 = new Enemy('images/enemies/enemy2.png', xcor, -30, 30, 30, 5, 50)
+    enemies.push(enemy2)
   }
-}
-
-function hasHit(box1, box2) {
-  var box1Bottom = box1.x + box1.width
-  var box1Left = box1.y + box1.height  
-  var box2Bottom = box2.x + box2.width
-  var box2Left = box2.y + box2.height  
-  
-  if(box1Bottom > box2.x && box2Bottom > box1.x && 
-    box1Left > box2.y && box2Left > box1.y) return true;
-  else return false
 }
 
 function shootEnemy() {
   for (var i = 0; i < enemies.length; i++) {
     for (var j = 0; j < bullets.length; j++) {
       if (hasHit(enemies[i], bullets[j])) { 
+        // var xplosion1 = new Xplosion(bullets[j].x, bullets[j].y, 20, 20) // XPLOSION 1
+        // xplosions1.push(xplosion1)
+        // xplode1 = true;
+        mainplayer.score += enemies[i].points
         enemies.splice(i,1)
         bullets.splice(j,1)
-        console.log('hit')
+        //setTimeout(xplosions1.pop(), 4000);
         shootEnemy()
         return 
       }
@@ -55,20 +49,27 @@ function shootEnemy() {
   }
 }
 
-// Animation Render Loop
+// ***** ANIMATION RENDER LOOP *****
 function updateEverything() {
   if (isGameStart) {
     frame++
   }
   bg.update()
-  mainplayer.damage()
+
+  mainplayer.damage() // main player items
+  healthdisplay.innerHTML = "Lives: " + mainplayer.health;
+  playerscore.innerHTML = "Score: " + mainplayer.score;
+
   spawnEnemy()
   for (var i = 0; i < enemies.length; i++) { // updating enemies array one by one
     enemies[i].update();
   }
-  for (var i = 0; i < bullets.length; i++) { //player's shot array
+  for (var i = 0; i < bullets.length; i++) { // updating player shots one by one
     bullets[i].update();
   }
+  // for (var i = 0; i < xplosions1.length; i++) { // updating 1 xplosions one by one
+  //   xplosions1[i].update(frame);
+  // }
 }
 function drawEverything() {
   ctx.clearRect(0,0,width,height)
@@ -81,6 +82,9 @@ function drawEverything() {
   for (var i = 0; i < bullets.length; i++) { //player's shot array
     bullets[i].draw(ctx);
   }
+  // for (var i = 0; i < xplosions1.length; i++) { // 1 xplosions array
+  //   xplosions1[i].draw(ctx);
+  // }
 }
 var animationId
 function animation(){

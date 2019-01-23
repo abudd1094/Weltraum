@@ -11,37 +11,35 @@ class Player {
     this.width = 50
     this.height = 80
     this.health = 3
+    this.score = 0
   }
   draw(ctx) {
     ctx.drawImage(this.img, this.sx, this.sy, this.swidth, this.sheight, this.x, this.y, this.width, this.height)
   }
   moveDown(ctx) {
-    if (mainplayer.y <= 460) {mainplayer.y += 5}
+    if (this.y <= 460) {this.y += 5}
     if (bg.vy > 3) {bg.moveDown(ctx)}
   }
   moveLeft(ctx) {
-    mainplayer.x -= 10   
-    mainplayer.sx = 0 
+    if (this.x > 0) {this.x -= 10}   
+    this.sx = 0
   }
   moveRight(ctx) {
-    mainplayer.x += 10
-    mainplayer.sx = 105.3 
+    this.x += 10
+    this.sx = 105.3 
   }
   moveUp(ctx) {
-    if (mainplayer.y >= 440) {mainplayer.y -= 5}
+    if (this.y >= 440) {this.y -= 5}
     if (bg.vy < 8) {bg.moveUp(ctx)}
   }
   damage(ctx) {
     for (var i = 0; i < enemies.length; i++) {
       if (this.health === 0) {
         //endGame();
-      } else if (enemies[i].y == this.y) {
+      } else if (hasHit(enemies[i], this)) {
         this.health -= 1;
-        console.log(mainplayer.health)
-
+        console.log(healthdisplay)
       }
-      
-      
     }
   }
 }

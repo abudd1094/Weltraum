@@ -12,11 +12,19 @@
   <!-- Canvas -->
   <div>
     <canvas id="gameboard" width="337" height="600"></canvas>
-    <input id="startbutton" class="button visible" type="button" value="Start Game">
-    <input id="scorebutton" class="button visible" type="button" value="High Scores">
+    <div>
+      <input id="startbutton" class="button visible" type="button" value="Start Game">
+      <input id="scorebutton" class="button visible" type="button" value="High Scores">
+    </div>
+    <div>
+      <p class = "hud" id="healthdisplay"></p>
+      <p class = "hud" id="playerscore"></p>
+    </div>
   </div>
 
   <!-- Scripts -->
+  <script src="scripts/actions.js"></script>
+  <script src="scripts/xplosions.js"></script>
   <script src="scripts/enemy.js"></script>
   <script src="scripts/shot.js"></script>
   <script src="scripts/player.js"></script>
