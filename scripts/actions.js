@@ -10,3 +10,18 @@ function hasHit(box1, box2) {
   else return false
 }
 
+// SCORE
+function timeScore() {
+  if (isGameStart == true && frame % 100 === 0) {
+    mainplayer.score += 1;
+  }
+}
+
+// ENEMY GENERATOR
+function spawnEnemy() {
+  if(frame > 0 && frame % 100 === 0) {
+    var xcor = Math.random() * (width - 20)
+    var enemy2 = new Enemy('images/enemies/enemy2.png', xcor, -30, 30, 30, 5, 50)
+    enemies.push(enemy2)
+  }
+}

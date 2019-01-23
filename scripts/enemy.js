@@ -38,5 +38,5 @@ class Enemy {
   update(ctx) {
     if (frame > 100) {
       this.y += this.vy
-    }
+    } 
   }}

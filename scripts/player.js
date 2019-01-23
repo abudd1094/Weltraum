@@ -17,19 +17,19 @@ class Player {
     ctx.drawImage(this.img, this.sx, this.sy, this.swidth, this.sheight, this.x, this.y, this.width, this.height)
   }
   moveDown(ctx) {
-    if (this.y <= 460) {this.y += 5}
-    if (bg.vy > 3) {bg.moveDown(ctx)}
+    //if (this.y <= 460) {this.y += 5}
+    if (bg.vy > 4) {bg.moveDown(ctx)}
   }
   moveLeft(ctx) {
-    if (this.x > 0) {this.x -= 10}   
+    if (this.x > 0) {this.x -= 15}   
     this.sx = 0
   }
   moveRight(ctx) {
-    this.x += 10
+    if (this.x < 337) {this.x += 15}
     this.sx = 105.3 
   }
   moveUp(ctx) {
-    if (this.y >= 440) {this.y -= 5}
+    //if (this.y >= 440) {this.y -= 5}
     if (bg.vy < 8) {bg.moveUp(ctx)}
   }
   damage(ctx) {
@@ -38,7 +38,7 @@ class Player {
         //endGame();
       } else if (hasHit(enemies[i], this)) {
         this.health -= 1;
-        console.log(healthdisplay)
+        enemies.splice(i,1);
       }
     }
   }

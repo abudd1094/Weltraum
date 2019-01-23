@@ -5,7 +5,7 @@ var width = canvas.width
 var height = canvas.height
 
 var bg = new Background('images/bg1.jpg', 852, 480, 0, 0, 0, 0.9)
-var title = new Title('images/weltraumTitle.png', 326.5, 100, 7, 150)
+//var title = new Title('images/weltraumTitle.png', 326.5, 100, 7, 150)
 
 // Game State
 var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 450)
@@ -15,22 +15,16 @@ var xplosions1 = [];
 
 var isGameStart = false
 var frame = 0
+var gamelevel = 1
 
 var xplode1 = false
 
 // ***** IN GAME INFO ******
 var healthdisplay = document.getElementById("healthdisplay")
 var playerscore = document.getElementById("playerscore")
+var currentlevel = document.getElementById("currentlevel")
 
 // ***** ENEMIES *****
-function spawnEnemy() {
-  if(frame > 0 && frame % 100 === 0) {
-    var xcor = Math.random() * (width - 20)
-    var enemy2 = new Enemy('images/enemies/enemy2.png', xcor, -30, 30, 30, 5, 50)
-    enemies.push(enemy2)
-  }
-}
-
 function shootEnemy() {
   for (var i = 0; i < enemies.length; i++) {
     for (var j = 0; j < bullets.length; j++) {
@@ -59,6 +53,8 @@ function updateEverything() {
   mainplayer.damage() // main player items
   healthdisplay.innerHTML = "Lives: " + mainplayer.health;
   playerscore.innerHTML = "Score: " + mainplayer.score;
+  currentlevel.innerHTML = "Level " + gamelevel;
+  timeScore();
 
   spawnEnemy()
   for (var i = 0; i < enemies.length; i++) { // updating enemies array one by one
@@ -74,7 +70,7 @@ function updateEverything() {
 function drawEverything() {
   ctx.clearRect(0,0,width,height)
   bg.draw(ctx)
-  title.draw(ctx, frame)
+  //title.draw(ctx, frame)
   mainplayer.draw(ctx)
   for (var i = 0; i < enemies.length; i++) { //drawing enemies array one by one
     enemies[i].draw(ctx);
@@ -94,6 +90,9 @@ function animation(){
   animationId = window.requestAnimationFrame(animation)
 }
 animation()
+
+
+
 
 // Player Movements
 window.onkeydown = function(event) {
@@ -134,10 +133,20 @@ startbutton.onclick = function() {
   startbutton.classList.add("hidden")
   scorebutton.classList.remove("visible")
   scorebutton.classList.add("hidden")
-  bg.vy = 3;
+  titlehtml.classList.remove("visible")
+  titlehtml.classList.add("hidden")
+  playerscore.classList.remove("hidden")
+  playerscore.classList.add("visible")
+  healthdisplay.classList.remove("hidden")
+  healthdisplay.classList.add("visible")
+  currentlevel.classList.remove("hidden")
+  currentlevel.classList.add("visible")
+  bg.vy = 4;
 }
 var scorebutton = document.getElementById("scorebutton");
 scorebutton.onclick = function() {
   scorebutton.classList.remove("visible")
   scorebutton.classList.add("hidden")
 }
+var titlehtml = document.getElementById("titlehtml");
+
