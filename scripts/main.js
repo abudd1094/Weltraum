@@ -19,11 +19,6 @@ var gamelevel = 1
 
 var xplode1 = false
 
-// ***** IN GAME INFO ******
-var lives = new Hud("Lives: " + mainplayer.health, 8, 590)
-var score = new Hud("Score: " + mainplayer.score, 290, 592)
-var level = new Hud("Level " + gamelevel, 8, 15)
-
 // ***** ANIMATION RENDER LOOP *****
 function updateEverything() {
   if (isGameStart) {
@@ -52,13 +47,18 @@ function drawEverything() {
   bg.draw(ctx)
   title.draw(ctx, frame)
 
-  lives.draw(ctx) // ?????? WHY ARENT THEY UPDATING????
+  // lives.draw(ctx) // ?????? WHY ARENT THEY UPDATING????
   // score.draw(ctx)
 
   // Draw score
-  ctx.fillText("Score: " + mainplayer.score, 290, 592)
+  if (frame > 0) {
+    ctx.fillStyle = "#FDC60C"
+    ctx.font = "20px VT323 "
+    ctx.fillText("Health: " + mainplayer.health, 5, 595)
+    ctx.fillText("Score: " + mainplayer.score, 240, 595)
+    ctx.fillText("Level " + gamelevel, 5, 15)
+  }
 
-  level.draw(ctx)
 
   mainplayer.draw(ctx)
   for (var i = 0; i < enemies.length; i++) { //drawing enemies array one by one
