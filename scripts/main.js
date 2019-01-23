@@ -24,24 +24,6 @@ var lives = new Hud("Lives: " + mainplayer.health, 8, 590)
 var score = new Hud("Score: " + mainplayer.score, 290, 592)
 var level = new Hud("Level " + gamelevel, 8, 15)
 
-// ***** ENEMIES *****
-function shootEnemy() {
-  for (var i = 0; i < enemies.length; i++) {
-    for (var j = 0; j < bullets.length; j++) {
-      if (hasHit(enemies[i], bullets[j])) { 
-        var xplosion1 = new Xplosion(enemies[i].x + 7, enemies[i].y + 10, 20, 20) // XPLOSION 1
-        xplosions1.push(xplosion1)
-        xplode1 = true;
-        mainplayer.score += enemies[i].points
-        enemies.splice(i,1)
-        bullets.splice(j,1)
-        shootEnemy()
-        return 
-      }
-    }
-  }
-}
-
 // ***** ANIMATION RENDER LOOP *****
 function updateEverything() {
   if (isGameStart) {
@@ -53,7 +35,7 @@ function updateEverything() {
   mainplayer.damage() // main player items
   timeScore();
 
-  spawnEnemy()
+  spawnEnemy() // generate basic enemies, move to enemy generator
   for (var i = 0; i < enemies.length; i++) { // updating enemies array one by one
     enemies[i].update();
   }

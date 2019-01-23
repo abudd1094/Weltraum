@@ -22,7 +22,7 @@
 // }
 
 class Enemy {
-  constructor(imgSrc, x, y, width, height, vy, points) {
+  constructor(imgSrc, x, y, width, height, vy, points, damage) { // points are scored for killing, damage is dealt for getting hit by
     this.img = new Image()
     this.img.src = imgSrc
     this.x = x
@@ -31,6 +31,7 @@ class Enemy {
     this.height = height
     this.vy = vy
     this.points = points
+    this.damage = damage
   }
   draw(ctx) {
     ctx.drawImage(this.img,this.x,this.y,this.width,this.height);

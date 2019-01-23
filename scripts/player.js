@@ -10,7 +10,7 @@ class Player {
     this.y = y
     this.width = 50
     this.height = 80
-    this.health = 3
+    this.health = 100
     this.score = 0
     this.xMovement // could be undefined, "right" or "left"
   }
@@ -46,7 +46,7 @@ class Player {
   moveLeft() {
     // if (this.x > 0) {this.x -= 15}   
     // this.sx = 0
-    this.xMovement = "left"
+    if(this.x > 7) {this.xMovement = "left"}
   }
   moveRight() {
     // if (this.x < 337) {this.x += 15}

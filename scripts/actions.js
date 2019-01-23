@@ -17,11 +17,21 @@ function timeScore() {
   }
 }
 
-// ENEMY GENERATOR
-function spawnEnemy() {
-  if(frame > 0 && frame % 100 === 0) {
-    var xcor = Math.random() * (width - 20)
-    var enemy2 = new Enemy('images/enemies/enemy2.png', xcor, -30, 30, 30, 5, 50)
-    enemies.push(enemy2)
+// COLLISIONS
+
+
+// PLAYER ATTACKS
+function shootEnemy() {
+  for (var i = 0; i < enemies.length; i++) {
+    for (var j = 0; j < bullets.length; j++) {
+      if (hasHit(enemies[i], bullets[j])) { 
+        var xplosion1 = new Xplosion(enemies[i].x + 7, enemies[i].y + 10, 32, 32) // XPLOSION 1
+        xplosions1.push(xplosion1)
+        xplode1 = true;
+        mainplayer.score += enemies[i].points
+        enemies.splice(i,1)
+        bullets.splice(j,1)
+      }
+    }
   }
 }
