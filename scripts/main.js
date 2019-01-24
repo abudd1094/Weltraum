@@ -11,6 +11,7 @@ var title = new Title('images/weltraumTitle.png', 326.5, 100, 7, 150)
 var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 450)
 var bullets = [];
 var enemies = [];
+var enemybullets = [];
 var xplosions1 = [];
 
 var isGameStart = false
@@ -20,60 +21,61 @@ var gamelevel = 1
 var xplode1 = false
 
 // ***** ANIMATION RENDER LOOP *****
+// UPDATE
 function updateEverything() {
   if (isGameStart) {
     frame++
   }
   bg.update()
-  mainplayer.update()
-  
-  mainplayer.damage() // main player items
-  timeScore();
-  
-
-  spawnEnemy() // generate basic enemies, move to enemy generator
+  mainplayer.update() // main player items
+  mainplayer.damage() 
+  timeScore(); // update time based score
+  spawnEnemy(); // generate round 1 enemies
+  spawnEnemy2(); // generate round 2 enemies
   for (var i = 0; i < enemies.length; i++) { // updating enemies array one by one
     enemies[i].update();
   }
   for (var i = 0; i < bullets.length; i++) { // updating player shots one by one
     bullets[i].update();
   }
+  for (var i = 0; i < enemybullets.length; i++) { // updating enemy shots one by one
+    enemybullets[i].update();
+  }
   for (var i = 0; i < xplosions1.length; i++) { // updating 1 xplosions one by one
     xplosions1[i].update();
   }
 }
+// DRAW
 function drawEverything() {
   ctx.clearRect(0,0,width,height)
   bg.draw(ctx)
   title.draw(ctx, frame)
-
-  // lives.draw(ctx) // ?????? WHY ARENT THEY UPDATING????
-  // score.draw(ctx)
-
-  // Draw score
-  if (frame > 0) {
+  // Draw HUD if game has started
+  if (frame > 0) { // HUD drawing
     ctx.fillStyle = "#FDC60C"
     ctx.font = "20px VT323 "
     ctx.fillText("Health: " + mainplayer.health, 5, 595)
     ctx.fillText("Score: " + mainplayer.score, 240, 595)
     ctx.fillText("Level " + gamelevel, 5, 15)
   }
-
-
-  mainplayer.draw(ctx)
+  mainplayer.draw(ctx) // draw main player
   for (var i = 0; i < enemies.length; i++) { //drawing enemies array one by one
     enemies[i].draw(ctx);
   }
-  for (var i = 0; i < bullets.length; i++) { //player's shot array
+  for (var i = 0; i < bullets.length; i++) { //draw player's shots
     bullets[i].draw(ctx);
   }
-  for (var i = 0; i < xplosions1.length; i++) { // 1 xplosions array
+  for (var i = 0; i < enemybullets.length; i++) { //draw enemy shots
+    enemybullets[i].draw(ctx);
+  }
+  for (var i = 0; i < xplosions1.length; i++) { // draw xplosions type 1
     xplosions1[i].draw(ctx);
   }
 }
-// ANIMATION LOOP
+// ANIMATE
 var animationId
 function animation(){
+  shootPlayer()
   shootEnemy()
   updateEverything()
   drawEverything()
@@ -82,8 +84,6 @@ function animation(){
   // }, 100)
 }
 animation()
-
-
 
 
 // Player Movements
@@ -99,7 +99,7 @@ window.onkeydown = function(event) {
     } else if(event.keyCode == 37) { // left
       mainplayer.moveLeft()   
     } else if(event.keyCode == 32) {
-      var playerbullet = new Shot(mainplayer.x + 26, mainplayer.y, 3, 11, -5)
+      var playerbullet = new Shot(mainplayer.x + 26, mainplayer.y, 3, 11, -5, "red", 0)
       bullets.push(playerbullet)
     }
   }
@@ -123,6 +123,7 @@ function endGame() {
   startbutton.classList.add("visible")
   scorebutton.classList.remove("hidden")
   scorebutton.classList.add("visible")
+  return
 }
 
 // Menu

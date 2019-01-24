@@ -1,5 +1,5 @@
 class Xplosion {
-  constructor(x, y, width, height) {
+  constructor(x, y, width, height, speed) {
     // this.img = new Image()
     // this.img.src 
     this.x = x
@@ -7,6 +7,7 @@ class Xplosion {
     this.width = width
     this.height = height
     this.imgs = []
+    this.speed
 
     for (var i = 0; i <= 5; i++) {
       this.imgs[i] = new Image()

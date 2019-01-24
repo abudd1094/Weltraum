@@ -35,12 +35,12 @@ function timeScore() {
 //   }
 // }
 
-// PLAYER ATTACKS
+// SHOOTING MECHANICS
 function shootEnemy() {
   for (var i = 0; i < enemies.length; i++) {
     for (var j = 0; j < bullets.length; j++) {
       if (hasHit(enemies[i], bullets[j])) { 
-        var xplosion1 = new Xplosion(enemies[i].x + 7, enemies[i].y + 10, 32, 32) // XPLOSION 1
+        var xplosion1 = new Xplosion(enemies[i].x + 7, enemies[i].y + 10, 32, 32, 0.33) // XPLOSION 1
         xplosions1.push(xplosion1)
         xplode1 = true;
         mainplayer.score += enemies[i].points
@@ -49,6 +49,20 @@ function shootEnemy() {
         shootEnemy()
         return 
       }
+    }
+  }
+}
+
+function shootPlayer() {
+  for (var i = 0; i < enemybullets.length; i++) {
+    if (hasHit(enemybullets[i], mainplayer)) { 
+      var xplosion1 = new Xplosion(mainplayer.x + 7, mainplayer.y + 10, 22, 22, 0.5) // XPLOSION 1
+      xplosions1.push(xplosion1)
+      xplode1 = true;
+      mainplayer.health -= 5
+      enemybullets.splice(i,1)
+      shootPlayer()
+      return 
     }
   }
 }
