@@ -78,7 +78,7 @@ function drawEverything() {
     ctx.fillText("Level " + gamelevel, 5, 15)
     ctx.fillText("High Score " + highscore, 240, 15)
     }
-  }
+  
 
   mainplayer.draw(ctx) // draw main player
   for (var i = 0; i < enemies.length; i++) { //drawing enemies array one by one
@@ -93,6 +93,7 @@ function drawEverything() {
   for (var i = 0; i < xplosions1.length; i++) { // draw xplosions type 1
     xplosions1[i].draw(ctx);
   }
+}
 
 // ANIMATE
 var animationId
@@ -161,8 +162,6 @@ startbutton.onclick = function() {
 
 // Game Over
 function endGame() {
-
-  mainplayer.score = 0
 
   isGameStart = false;
   bg.vy = 0.9
