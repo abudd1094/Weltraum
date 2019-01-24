@@ -70,13 +70,15 @@ class Player {
   }
   damage() {
     for (var i = enemies.length - 1; i  >= 0; i--) {
-      if (this.health === 0) {
+      if (this.health < 0) {
         endGame();
       } else if (hasHit(enemies[i], this)) {
         this.health -= enemies[i].damage;
         enemies.splice(i,1);
         var xplosion1 = new Xplosion(mainplayer.x + 12, mainplayer.y + 2, 32, 32, 0.33) // XPLOSION 1 
         xplosions1.push(xplosion1) // why does this not work with enemy i anymore?
+        var playerhit = new Audio("audio/death1.mp3")
+        playerhit.play()
         return
       }
     }

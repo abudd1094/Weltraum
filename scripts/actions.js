@@ -47,7 +47,8 @@ function shootEnemy() {
         enemies.splice(i,1)
         bullets.splice(j,1)
         shootEnemy()
-        enemy1hit.play()
+        var enemy1hitsound = new Audio("audio/hit2.mp3")
+        enemy1hitsound.play()
         return 
       }
     }
@@ -63,6 +64,8 @@ function shootPlayer() {
       mainplayer.health -= 5
       enemybullets.splice(i,1)
       shootPlayer()
+      var playerhitsound = new Audio("audio/hit1.mp3")
+      playerhitsound.play()
       return 
     }
   }

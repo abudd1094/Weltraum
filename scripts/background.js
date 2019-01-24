@@ -21,6 +21,10 @@ class Background {
     if (this.y > this.height) {
       this.y -= this.height;
     }
+    // if (frame > 0 && frame < 840) {
+    //   this.vy = 7;
+    // } else if (frame > 840) {
+    //   this.vy = 4
   }
   moveUp(ctx) {
     this.vy += 3
@@ -29,6 +33,7 @@ class Background {
     this.vy -= 3
   }
 }
+
 
 
 

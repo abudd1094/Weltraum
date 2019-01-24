@@ -22,15 +22,17 @@
 // }
 
 class Enemy {
-  constructor(imgSrc, x, y, width, height, vy, points, damage, canShoot) { // points are scored for killing, damage is dealt for getting hit by
+  constructor(imgSrc, x, y, width, height, vx, vy, points, shotspeed, damage, canShoot) { // points are scored for killing, damage is dealt for getting hit by
     this.img = new Image()
     this.img.src = imgSrc
     this.x = x
     this.y = y
     this.width = width
     this.height = height
+    this.vx = vx
     this.vy = vy
     this.points = points
+    this.shotspeed = shotspeed
     this.damage = damage
     this.canShoot = canShoot
   }
@@ -40,10 +42,11 @@ class Enemy {
   update() {
     if (frame > 100) {
       this.y += this.vy
+      this.x += this.vx
     } 
   }
-  shoot(color) {
-    var enemybullet = new Shot(this.x + 15, this.y + 20, 3, 11, 7, color)
+  shoot(color, damage) {
+    var enemybullet = new Shot(this.x + 15, this.y + 20, 3, 11, this.shotspeed, color, damage)
     enemybullets.push(enemybullet)
   }
 }
