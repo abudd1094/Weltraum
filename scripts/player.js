@@ -49,7 +49,7 @@ class Player {
   }
   moveDown() {
     //if (this.y <= 460) {this.y += 5}
-    if (bg.vy > 4) {bg.moveDown()}
+    //if (bg.vy > 4) {bg.moveDown()}
   }
   moveLeft() {
     // if (this.x > 0) {this.x -= 15}   
@@ -66,7 +66,7 @@ class Player {
   }
   moveUp() {
     //if (this.y >= 440) {this.y -= 5}
-    if (bg.vy < 8) {bg.moveUp()}
+    //if (bg.vy < 8) {bg.moveUp()}
   }
   damage() {
     for (var i = enemies.length - 1; i  >= 0; i--) {

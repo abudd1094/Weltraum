@@ -15,8 +15,6 @@ var startgamesound = new Audio("audio/misc3.mp3")
 // Game State
 var highscore = []
 
-
-
 var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 450)
 var bullets = [];
 var enemies = [];
@@ -30,13 +28,6 @@ var xplode1 = false
 
 // LEVELS
 var gamelevel = 1
-
-if (frame > 2000) {
-  gamelevel = 2
-  var levelupsound = new Audio("audio/misc2.mp3")
-  levelupsound.play()
-}
-
 
 // ***** ANIMATION RENDER LOOP *****
 // UPDATE
@@ -79,9 +70,13 @@ function drawEverything() {
     ctx.font = "20px VT323"
     ctx.fillText("Health: " + mainplayer.health, 5, 595)
     ctx.fillText("Score: " + mainplayer.score, 240, 595)
+    if (frame % 2500 === 0) { // LEVEL UP
+      gamelevel += 1
+      var levelupsound = new Audio("audio/misc2.mp3")
+      levelupsound.play()
+    }
     ctx.fillText("Level " + gamelevel, 5, 15)
-    if (highscore !== undefined) {
-      ctx.fillText("High Score " + highscore[highscore.length - 1], 240, 15)
+    ctx.fillText("High Score " + highscore, 240, 15)
     }
   }
 
@@ -98,7 +93,7 @@ function drawEverything() {
   for (var i = 0; i < xplosions1.length; i++) { // draw xplosions type 1
     xplosions1[i].draw(ctx);
   }
-}
+
 // ANIMATE
 var animationId
 function animation(){
@@ -166,6 +161,9 @@ startbutton.onclick = function() {
 
 // Game Over
 function endGame() {
+
+  mainplayer.score = 0
+
   isGameStart = false;
   bg.vy = 0.9
   frame = 0;
