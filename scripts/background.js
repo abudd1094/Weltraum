@@ -27,10 +27,10 @@ class Background {
     //   this.vy = 4
   }
   moveUp(ctx) {
-    //this.vy += 3
+    this.vy += 3
   }
   moveDown(ctx) {
-    //this.vy -= 3
+    this.vy -= 3
   }
 }
 

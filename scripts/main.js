@@ -13,13 +13,17 @@ var menusong = document.getElementById("menusong")
 var startgamesound = new Audio("audio/misc3.mp3")
 
 // Game State
-var highscore = []
+var highscore = localStorage.getItem('highscore')
 
 var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 450)
 var bullets = [];
-var enemies = [];
+var enemies = []; // use w explosion 1
+var bigenemies = []; // use w explosion 2
 var enemybullets = [];
 var xplosions1 = [];
+var xplosions2 = [];
+
+var powerups = [];
 
 var isGameStart = false
 var frame = 0
@@ -42,12 +46,23 @@ function updateEverything() {
   mainplayer.update() // main player items
   mainplayer.damage() 
   timeScore(); // update time based score
+  spaceLettuce();
   spawnEnemy(); // generate round 1 enemies
   spawnEnemy2(); // generate round 2 enemies
   spawnEnemy3();
   spawnEnemy4();
+  spawnEnemy5();
+  trumpAlert();
+  spawnEnemy6();
+  spawnEnemy7();
+  for (var i = 0; i < powerups.length; i++) { // updating powerups array one by one
+    powerups[i].update();
+  }
   for (var i = 0; i < enemies.length; i++) { // updating enemies array one by one
     enemies[i].update();
+  }
+  for (var i = 0; i < bigenemies.length; i++) { // updating big enemies array one by one
+    bigenemies[i].update();
   }
   for (var i = 0; i < bullets.length; i++) { // updating player shots one by one
     bullets[i].update();
@@ -57,6 +72,9 @@ function updateEverything() {
   }
   for (var i = 0; i < xplosions1.length; i++) { // updating 1 xplosions one by one
     xplosions1[i].update();
+  }
+  for (var i = 0; i < xplosions2.length; i++) { // updating 1 xplosions one by one
+    xplosions2[i].update();
   }
 }
 // DRAW
@@ -70,19 +88,24 @@ function drawEverything() {
     ctx.font = "20px VT323"
     ctx.fillText("Health: " + mainplayer.health, 5, 595)
     ctx.fillText("Score: " + mainplayer.score, 240, 595)
-    if (frame % 2500 === 0) { // LEVEL UP
+    if (frame % 2000 === 0) { // LEVEL UP
       gamelevel += 1
       var levelupsound = new Audio("audio/misc2.mp3")
       levelupsound.play()
     }
     ctx.fillText("Level " + gamelevel, 5, 15)
-    ctx.fillText("High Score " + highscore, 240, 15)
-    }
-  
+    ctx.fillText("High Score " + highscore, 200, 15)
+  }
 
   mainplayer.draw(ctx) // draw main player
+  for (var i = 0; i < powerups.length; i++) { // drawing powerups array one by one
+    powerups[i].draw(ctx);
+  }
   for (var i = 0; i < enemies.length; i++) { //drawing enemies array one by one
     enemies[i].draw(ctx);
+  }
+  for (var i = 0; i < bigenemies.length; i++) { //drawing big enemies array one by one
+    bigenemies[i].draw(ctx);
   }
   for (var i = 0; i < bullets.length; i++) { //draw player's shots
     bullets[i].draw(ctx);
@@ -93,6 +116,9 @@ function drawEverything() {
   for (var i = 0; i < xplosions1.length; i++) { // draw xplosions type 1
     xplosions1[i].draw(ctx);
   }
+  for (var i = 0; i < xplosions2.length; i++) { // draw xplosions type 2
+    xplosions2[i].draw(ctx);
+  }
 }
 
 // ANIMATE
@@ -100,6 +126,8 @@ var animationId
 function animation(){
   shootPlayer()
   shootEnemy()
+  shootEnemy2()
+  spaceLettucePowerUp()
   updateEverything()
   drawEverything()
   // setTimeout(() => {
@@ -144,9 +172,21 @@ window.onkeyup = function(event) {
 // Menu
 // var mastercontainer = document.getElementById("mastercontainer");
 var startbutton = document.getElementById("startbutton");
+var prompt = document.getElementById("prompt");
+
+function lettuceprompt () {
+  if (frame < 100) {
+    prompt.innerHTML = "Eat your space lettuce!"
+  } else {
+    prompt.innerHTML = ""
+  }
+}
+
 startbutton.onclick = function() {
   mainplayer.health = 100
   isGameStart = true
+  mainplayer.score = 0
+  mainplayer.health
   startbutton.classList.remove("visible")
   startbutton.classList.add("hidden")
   // musicbutton.classList.remove("visible")
@@ -155,24 +195,20 @@ startbutton.onclick = function() {
   // menusong.play()
   // mastercontainer.classList.add("introanimation")
   startgamesound.play()
-
+  lettuceprompt()
   canvas.requestFullscreen()
 }
 
 
 // Game Over
+var menuinfo = document.getElementById("menuinfo")
 function endGame() {
-
   isGameStart = false;
   bg.vy = 0.9
   frame = 0;
   startbutton.classList.remove("hidden")
   startbutton.classList.add("visible")
-  for (var i = 0; i < highscore.length; i++) { 
-    if (mainplayer.score > highscore[i]) {
-      highscore.push(mainplayer.score);
-    }
-  }
+
   ctx.clearRect(0,0,width,height)
   // musicbutton.classList.remove("hidden")
   // musicbutton.classList.add("visible")
@@ -181,7 +217,7 @@ function endGame() {
 
 
 
-// To get the highscore
-localStorage.getItem('highscore') // returns a string
-// To set the highscore
-localStorage.setItem('highscore', 42)
+// // To get the highscore
+// localStorage.getItem('highscore') // returns a string
+// // To set the highscore
+// localStorage.setItem('highscore', highscore)

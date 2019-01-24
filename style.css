@@ -29,6 +29,15 @@ canvas {
   border: 5px white solid;
 }
 
+#prompt {
+  position: absolute;
+  text-align: center;
+  background-color: inherit;
+  color: white;
+  font-family: 'VT323', monospace;
+  font-size: 30px;
+}
+
 /* Menu */
 .button {
   border: none;

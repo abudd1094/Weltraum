@@ -35,6 +35,20 @@ function timeScore() {
 //   }
 // }
 
+// POWER UPS
+function spaceLettucePowerUp() {
+  for (var i = 0; i < powerups.length; i++) {
+      if (hasHit(powerups[i], mainplayer)) { 
+        powerups.splice(i,1)
+        mainplayer.health += 10
+        spaceLettucePowerUp()
+        var lettucesound = new Audio("audio/misc1.mp3")
+        lettucesound.play()
+        return 
+      }
+    }
+  }
+
 // SHOOTING MECHANICS
 function shootEnemy() {
   for (var i = 0; i < enemies.length; i++) {
@@ -45,6 +59,25 @@ function shootEnemy() {
         xplode1 = true;
         mainplayer.score += enemies[i].points
         enemies.splice(i,1)
+        bullets.splice(j,1)
+        shootEnemy()
+        var enemy1hitsound = new Audio("audio/hit2.mp3")
+        enemy1hitsound.play()
+        return 
+      }
+    }
+  }
+}
+
+function shootEnemy2() {
+  for (var i = 0; i < bigenemies.length; i++) {
+    for (var j = 0; j < bullets.length; j++) {
+      if (hasHit(bigenemies[i], bullets[j])) { 
+        var xplosion2 = new Xplosion(bigenemies[i].x + 7, bigenemies[i].y + 10, 40, 40, 0.33) // XPLOSION 1
+        xplosions2.push(xplosion2)
+        xplode1 = true;
+        mainplayer.score += bigenemies[i].points
+        bigenemies.splice(i,1)
         bullets.splice(j,1)
         shootEnemy()
         var enemy1hitsound = new Audio("audio/hit2.mp3")
@@ -70,3 +103,5 @@ function shootPlayer() {
     }
   }
 }
+
+
