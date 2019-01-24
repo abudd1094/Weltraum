@@ -32,11 +32,19 @@ class Player {
   }
   update() {
     var lateralSpeed = 5
-    if (this.xMovement === "right") {
-      this.x += lateralSpeed
-    }
-    else if (this.xMovement === "left") {
-      this.x -= lateralSpeed
+    if (this.x < 0) { // enfore x boundaries
+      this.xMovement = undefined
+      this.x = 0
+    } else if (this.x > 287) {
+      this.xMovement = undefined
+      this.x = 287
+    } else if (this.x >= 0 && this.x <= 337) { // allow movement
+      if (this.xMovement === "right") {
+        this.x += lateralSpeed
+      }
+      else if (this.xMovement === "left") {
+        this.x -= lateralSpeed
+      }
     }
   }
   moveDown() {

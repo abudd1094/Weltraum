@@ -1,3 +1,17 @@
+/* intro */
+.introanimation {
+  animation-name: intro;
+  animation-duration: 15s;
+}
+
+@keyframes intro {
+  0% {background-color: black;}
+  95% {background-color: red;}
+  100% {background-color: black;}
+}
+
+
+/* main */
 body {
   background-color: black;
   margin: 0 auto 0 auto;
@@ -36,7 +50,7 @@ canvas {
   top: 300px;
 }
 
-#scorebutton {
+#musicbutton {
   position: absolute;
   left: 50%;
   margin-left: -70px;

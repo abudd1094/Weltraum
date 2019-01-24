@@ -47,6 +47,7 @@ function shootEnemy() {
         enemies.splice(i,1)
         bullets.splice(j,1)
         shootEnemy()
+        enemy1hit.play()
         return 
       }
     }

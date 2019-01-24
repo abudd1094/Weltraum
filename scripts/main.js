@@ -7,6 +7,13 @@ var height = canvas.height
 var bg = new Background('images/bg1.jpg', 852, 480, 0, 0, 0, 0.9)
 var title = new Title('images/weltraumTitle.png', 326.5, 100, 7, 150)
 
+// Sounds
+var themesong = document.getElementById("themesong")
+var menusong = document.getElementById("menusong")
+
+var playershotsound = document.getElementById("shot1")
+var enemy1hit = document.getElementById("enemy1hit")
+
 // Game State
 var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 450)
 var bullets = [];
@@ -101,6 +108,7 @@ window.onkeydown = function(event) {
     } else if(event.keyCode == 32) {
       var playerbullet = new Shot(mainplayer.x + 26, mainplayer.y, 3, 11, -5, "red", 0)
       bullets.push(playerbullet)
+      playershotsound.play()
     }
   }
 } 
@@ -114,6 +122,30 @@ window.onkeyup = function(event) {
   }
 }
 
+// Menu
+// var mastercontainer = document.getElementById("mastercontainer");
+var startbutton = document.getElementById("startbutton");
+startbutton.onclick = function() {
+  isGameStart = true
+  startbutton.classList.remove("visible")
+  startbutton.classList.add("hidden")
+  musicbutton.classList.remove("visible")
+  musicbutton.classList.add("hidden")
+  bg.vy = 4;
+  if (musicon = true) {themesong.play() }
+  // mastercontainer.classList.add("introanimation")
+}
+
+var musicon = true
+var musicbutton = document.getElementById("musicbutton");
+musicbutton.onclick = function() {
+  if (musicon = true) {
+    musicon = false
+  } else {
+    musicon = true
+  }
+}
+
 // Game Over
 function endGame() {
   isGameStart = false;
@@ -121,24 +153,9 @@ function endGame() {
   frame = 0;
   startbutton.classList.remove("hidden")
   startbutton.classList.add("visible")
-  scorebutton.classList.remove("hidden")
-  scorebutton.classList.add("visible")
+  musicbutton.classList.remove("hidden")
+  musicbutton.classList.add("visible")
   return
 }
 
-// Menu
-var startbutton = document.getElementById("startbutton");
-startbutton.onclick = function() {
-  isGameStart = true
-  startbutton.classList.remove("visible")
-  startbutton.classList.add("hidden")
-  scorebutton.classList.remove("visible")
-  scorebutton.classList.add("hidden")
-  bg.vy = 4;
-}
-var scorebutton = document.getElementById("scorebutton");
-scorebutton.onclick = function() {
-  scorebutton.classList.remove("visible")
-  scorebutton.classList.add("hidden")
-}
 
