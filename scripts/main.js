@@ -5,7 +5,7 @@ var width = canvas.width
 var height = canvas.height
 
 var bg = new Background('images/bg1.jpg', 852, 480, 0, 0, 0, 0.9)
-var title = new Title('images/weltraumTitle.png', 326.5, 100, 7, 150)
+var title = new Title('images/weltraumTitle.png', 326.5, 120, 7, 150)
 
 // Sounds
 var themesong = document.getElementById("themesong")
@@ -88,7 +88,7 @@ function drawEverything() {
     ctx.font = "20px VT323"
     ctx.fillText("Health: " + mainplayer.health, 5, 595)
     ctx.fillText("Score: " + mainplayer.score, 240, 595)
-    if (frame % 2000 === 0) { // LEVEL UP
+    if (frame % 1000 === 0) { // LEVEL UP
       gamelevel += 1
       var levelupsound = new Audio("audio/misc2.mp3")
       levelupsound.play()
@@ -174,14 +174,6 @@ window.onkeyup = function(event) {
 var startbutton = document.getElementById("startbutton");
 var prompt = document.getElementById("prompt");
 
-function lettuceprompt () {
-  if (frame < 100) {
-    prompt.innerHTML = "Eat your space lettuce!"
-  } else {
-    prompt.innerHTML = ""
-  }
-}
-
 startbutton.onclick = function() {
   mainplayer.health = 100
   isGameStart = true
@@ -189,13 +181,10 @@ startbutton.onclick = function() {
   mainplayer.health
   startbutton.classList.remove("visible")
   startbutton.classList.add("hidden")
-  // musicbutton.classList.remove("visible")
-  // musicbutton.classList.add("hidden")
   bg.vy = 4;
   // menusong.play()
   // mastercontainer.classList.add("introanimation")
   startgamesound.play()
-  lettuceprompt()
   canvas.requestFullscreen()
 }
 
@@ -210,14 +199,11 @@ function endGame() {
   startbutton.classList.add("visible")
 
   ctx.clearRect(0,0,width,height)
-  // musicbutton.classList.remove("hidden")
-  // musicbutton.classList.add("visible")
+
   return
 }
 
 
+// INTRO
+canvas.onload =  canvas.classList.add("introanimation");
 
-// // To get the highscore
-// localStorage.getItem('highscore') // returns a string
-// // To set the highscore
-// localStorage.setItem('highscore', highscore)

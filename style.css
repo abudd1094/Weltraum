@@ -31,11 +31,14 @@ canvas {
 
 #prompt {
   position: absolute;
-  text-align: center;
+  left: 50%;
+  margin-left: -65px;
+  top: 300px;
   background-color: inherit;
   color: white;
   font-family: 'VT323', monospace;
   font-size: 30px;
+
 }
 
 /* Menu */
@@ -56,7 +59,7 @@ canvas {
   position: absolute;
   left: 50%;
   margin-left: -65px;
-  top: 300px;
+  top: 320px;
 }
 
 #musicbutton {
