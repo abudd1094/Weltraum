@@ -10,7 +10,7 @@ function spaceLettuce() {
 
 // ENEMY SWARMS
 function spawnEnemy() { //enemy 1 is the basic little guy no shots
-  if(frame > 100 && frame % 80 === 0 && gamelevel < 5  && isGameStart == true) {
+  if(frame > 100 && frame % 70 === 0 && gamelevel < 5  && isGameStart == true) {
     var xcor = Math.random() * (width - 20)
     var enemy = new Enemy('images/enemies/enemy1.png', xcor, -30, 30, 30, 0, 5, 15, 0, 5, false)
     enemies.push(enemy)
@@ -19,7 +19,7 @@ function spawnEnemy() { //enemy 1 is the basic little guy no shots
 
 function spawnEnemy2() { // enemy 2 shoots at a consecutive rate
   if (frame > 600 && frame % 80 === 0 && gamelevel < 5  && isGameStart == true) {  
-    if(frame % 110 === 0) {
+    if(frame % 100 === 0) {
       var xcor = Math.random() * (width - 20)
       var enemy2 = new Enemy('images/enemies/enemy2.png', xcor, -32, 32, 30, 0, 5, 25, 7, 10, true) // 
       enemies.push(enemy2)
@@ -37,7 +37,7 @@ function spawnEnemy2() { // enemy 2 shoots at a consecutive rate
 
 function spawnEnemy3() { // enemy 3 shoots moving right
   if (gamelevel >= 2 && gamelevel < 5  && isGameStart == true) {  
-    if(frame % 120 === 0) {
+    if(frame % 110 === 0) {
       var xcor = Math.random() * (width - 20)
       var enemy2 = new Enemy('images/enemies/enemy3.png', xcor, -32, 32, 30, 1, 5, 35, 7, 15, true) // 
       enemies.push(enemy2)
@@ -136,4 +136,8 @@ function spawnEnemy6() { // enemy 6 is Trump
       }
     }
 
+
+    // Break
+
+    
     

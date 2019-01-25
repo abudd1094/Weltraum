@@ -71,6 +71,15 @@ canvas {
   color: #FDC60C
 }
 
+#menuinfo {
+  position: absolute;
+  left: 50%;
+  margin-left: -70px;
+  top: 350px;
+  font-size: 10;
+  color: #FDC60C
+}
+
 .visible {
   visibility: visible;
   opacity: 1;

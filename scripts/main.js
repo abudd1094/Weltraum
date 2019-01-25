@@ -156,6 +156,8 @@ window.onkeydown = function(event) {
       playershotsound.play()
     } else if(event.keyCode == 77) {
       themesong.play() 
+    } else if (event.keyCode == 86) {
+
     }
   }
 } 
@@ -181,6 +183,8 @@ startbutton.onclick = function() {
   mainplayer.health
   startbutton.classList.remove("visible")
   startbutton.classList.add("hidden")
+  musicbutton.classList.remove("visible")
+  musicbutton.classList.add("hidden")
   bg.vy = 4;
   // menusong.play()
   // mastercontainer.classList.add("introanimation")
@@ -198,6 +202,8 @@ function endGame() {
   frame = 0;
   startbutton.classList.remove("hidden")
   startbutton.classList.add("visible")
+  musicbutton.classList.remove("hidden")
+  musicbutton.classList.add("visible")
   bullets = [];
   enemies = []; // use w explosion 1
   bigenemies = []; // use w explosion 2
@@ -210,6 +216,8 @@ function endGame() {
   document.exitFullscreen()
   menuinfo.classList.remove("hidden")
   menuinfo.classList.add("visible")
+  var endgamesound = new Audio("audio/death5.mp3")
+  endgamesound.play();
   return
 }
 
