@@ -185,6 +185,8 @@ startbutton.onclick = function() {
   startbutton.classList.add("hidden")
   musicbutton.classList.remove("visible")
   musicbutton.classList.add("hidden")
+  menuinfo.classList.remove("visible")
+  menuinfo.classList.add("hidden")
   bg.vy = 4;
   // menusong.play()
   // mastercontainer.classList.add("introanimation")
@@ -196,6 +198,7 @@ startbutton.onclick = function() {
 // Game Over
 var menuinfo = document.getElementById("menuinfo")
 musicbutton.value = "Highscore: " + highscore
+
 function endGame() {
   isGameStart = false;
   bg.vy = 0.9
@@ -204,6 +207,8 @@ function endGame() {
   startbutton.classList.add("visible")
   musicbutton.classList.remove("hidden")
   musicbutton.classList.add("visible")
+  menuinfo.classList.remove("hidden")
+  menuinfo.classList.add("visible")
   bullets = [];
   enemies = []; // use w explosion 1
   bigenemies = []; // use w explosion 2
