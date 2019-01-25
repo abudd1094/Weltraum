@@ -10,7 +10,7 @@ class Powerup {
     this.vy = vy
   }
   draw(ctx) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+    if (isGameStart == true) {ctx.drawImage(this.img, this.x, this.y, this.width, this.height)}
   }
   update() {
     if (frame > 100) {

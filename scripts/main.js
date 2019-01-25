@@ -191,15 +191,25 @@ startbutton.onclick = function() {
 
 // Game Over
 var menuinfo = document.getElementById("menuinfo")
+musicbutton.value = "Highscore: " + highscore
 function endGame() {
   isGameStart = false;
   bg.vy = 0.9
   frame = 0;
   startbutton.classList.remove("hidden")
   startbutton.classList.add("visible")
-
+  bullets = [];
+  enemies = []; // use w explosion 1
+  bigenemies = []; // use w explosion 2
+  enemybullets = [];
+  xplosions1 = [];
+  xplosions2 = [];
+  powerups = [];
+  xplode1 = false
   ctx.clearRect(0,0,width,height)
-
+  document.exitFullscreen()
+  menuinfo.classList.remove("hidden")
+  menuinfo.classList.add("visible")
   return
 }
 

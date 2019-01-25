@@ -53,7 +53,7 @@ function spaceLettucePowerUp() {
 function shootEnemy() {
   for (var i = 0; i < enemies.length; i++) {
     for (var j = 0; j < bullets.length; j++) {
-      if (hasHit(enemies[i], bullets[j])) { 
+      if (hasHit(enemies[i], bullets[j])  && isGameStart == true) { 
         var xplosion1 = new Xplosion(enemies[i].x + 7, enemies[i].y + 10, 32, 32, 0.33) // XPLOSION 1
         xplosions1.push(xplosion1)
         xplode1 = true;
@@ -72,7 +72,7 @@ function shootEnemy() {
 function shootEnemy2() {
   for (var i = 0; i < bigenemies.length; i++) {
     for (var j = 0; j < bullets.length; j++) {
-      if (hasHit(bigenemies[i], bullets[j])) { 
+      if (hasHit(bigenemies[i], bullets[j])  && isGameStart == true) { 
         var xplosion2 = new Xplosion(bigenemies[i].x + 7, bigenemies[i].y + 10, 40, 40, 0.33) // XPLOSION 1
         xplosions2.push(xplosion2)
         xplode1 = true;
@@ -90,7 +90,7 @@ function shootEnemy2() {
 
 function shootPlayer() {
   for (var i = 0; i < enemybullets.length; i++) {
-    if (hasHit(enemybullets[i], mainplayer)) { 
+    if (hasHit(enemybullets[i], mainplayer) && isGameStart == true) { 
       var xplosion1 = new Xplosion(mainplayer.x + 7, mainplayer.y + 10, 22, 22, 0.5) // XPLOSION 1
       xplosions1.push(xplosion1)
       xplode1 = true;
