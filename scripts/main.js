@@ -15,7 +15,7 @@ var startgamesound = new Audio("audio/misc3.mp3")
 // Game State
 var highscore = localStorage.getItem('highscore')
 
-var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 450)
+var mainplayer = new Player('images/spaceship.png', 51.8, 0, width/2 - 25, 600)
 var bullets = [];
 var enemies = []; // use w explosion 1
 var bigenemies = []; // use w explosion 2
@@ -43,6 +43,9 @@ function updateEverything() {
     frame += 1
   }
   bg.update()
+  if (mainplayer.y > 450 && frame > 0) {
+    mainplayer.y -= 0.9;
+  }
   mainplayer.update() // main player items
   mainplayer.damage() 
   timeScore(); // update time based score
@@ -178,17 +181,17 @@ var prompt = document.getElementById("prompt");
 
 startbutton.onclick = function() {
   mainplayer.health = 100
+
+  bg.vy = 4;
+  // mainplayer.y = 450;
   isGameStart = true
   mainplayer.score = 0
-  mainplayer.health
+  mainplayer.health = 100
+  gamelevel = 1
   startbutton.classList.remove("visible")
   startbutton.classList.add("hidden")
-  musicbutton.classList.remove("visible")
-  musicbutton.classList.add("hidden")
-  menuinfo.classList.remove("visible")
-  menuinfo.classList.add("hidden")
-  bg.vy = 4;
-  // menusong.play()
+  highscoremenu.classList.remove("visible")
+  highscoremenu.classList.add("hidden")
   // mastercontainer.classList.add("introanimation")
   startgamesound.play()
   canvas.requestFullscreen()
@@ -197,7 +200,7 @@ startbutton.onclick = function() {
 
 // Game Over
 var menuinfo = document.getElementById("menuinfo")
-musicbutton.value = "Highscore: " + highscore
+highscoremenu.value = "Highscore: " + highscore
 
 function endGame() {
   isGameStart = false;
@@ -205,10 +208,8 @@ function endGame() {
   frame = 0;
   startbutton.classList.remove("hidden")
   startbutton.classList.add("visible")
-  musicbutton.classList.remove("hidden")
-  musicbutton.classList.add("visible")
-  menuinfo.classList.remove("hidden")
-  menuinfo.classList.add("visible")
+  highscoremenu.classList.remove("hidden")
+  highscoremenu.classList.add("visible")
   bullets = [];
   enemies = []; // use w explosion 1
   bigenemies = []; // use w explosion 2
@@ -219,13 +220,8 @@ function endGame() {
   xplode1 = false
   ctx.clearRect(0,0,width,height)
   document.exitFullscreen()
-  menuinfo.classList.remove("hidden")
-  menuinfo.classList.add("visible")
-  var endgamesound = new Audio("audio/death5.mp3")
-  endgamesound.play();
   return
 }
-
 
 // INTRO
 canvas.onload =  canvas.classList.add("introanimation");
