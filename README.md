@@ -1,1 +1,1 @@
-# Ironhack-Project-1-Game
+Scripts are divided by Classes and Categorical interactions.
