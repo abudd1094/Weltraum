@@ -1,4 +1,4 @@
-class Xplosion {
+class Xplosion22 {
   constructor(x, y, width, height, speed) {
     // this.img = new Image()
     // this.img.src 
@@ -22,7 +22,7 @@ class Xplosion {
   }
   update() {
     if (this.iImg < 6) {
-      this.iImg += 0.33
+      this.iImg += this.speed
     }
   }
 }

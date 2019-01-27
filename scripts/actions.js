@@ -63,6 +63,7 @@ function shootEnemy() {
         shootEnemy()
         var enemy1hitsound = new Audio("audio/hit2.mp3")
         enemy1hitsound.play()
+        enemy1hitsound.volume = 0.7
         return 
       }
     }
@@ -99,6 +100,7 @@ function shootPlayer() {
       shootPlayer()
       var playerhitsound = new Audio("audio/hit1.mp3")
       playerhitsound.play()
+      playerhitsound.volume = 0.7
       return 
     }
   }

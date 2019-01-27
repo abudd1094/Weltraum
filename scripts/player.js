@@ -82,6 +82,7 @@ class Player {
         xplosions1.push(xplosion1) // why does this not work with enemy i anymore?
         var playerhit = new Audio("audio/death1.mp3")
         playerhit.play()
+        playerhit.volume = 0.3
         return
       }
     }

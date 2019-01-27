@@ -181,7 +181,7 @@ var prompt = document.getElementById("prompt");
 
 startbutton.onclick = function() {
   mainplayer.health = 100
-
+  mainplayer.x = width/2 - 25; 
   bg.vy = 4;
   // mainplayer.y = 450;
   isGameStart = true
@@ -203,7 +203,15 @@ var menuinfo = document.getElementById("menuinfo")
 highscoremenu.value = "Highscore: " + highscore
 
 function endGame() {
+  var gameEndSound = new Audio('audio/death5.mp3')
+  gameEndSound.play()
+  gameEndSound.volume = 0.2
+  var xplosion22 = new Xplosion22(mainplayer.x + 7, mainplayer.y + 10, 40, 40, 0.1) // XPLOSION 1
+  xplosions2.push(xplosion22)
+  xplode1 = true;
   isGameStart = false;
+  mainplayer.y = 600;
+  mainplayer.x = width/2 - 25; 
   bg.vy = 0.9
   frame = 0;
   startbutton.classList.remove("hidden")
