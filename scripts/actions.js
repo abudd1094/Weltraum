@@ -17,24 +17,6 @@ function timeScore() {
   }
 }
 
-// COLLISIONS
-// function collision() {
-//   for (var i = 0; i < enemies.length; i++) {
-//     var playerfront = mainplayer.x + mainplayer.width
-//     var shipfront = enemies[i].x + enemies[i].width
-//     var playerside = mainplayer.y + mainplayer.height
-//     var shipside = enemies[i].y + enemies[i].height
-//     if (playerfront > enemies[i].x && shipfront > mainplayer.x && 
-//       playerside > enemies[i].y && shipside > mainplayer.y) {
-//       var xplosion1 = new Xplosion(enemies[i].x + 7, enemies[i].y + 10, 32, 32) // XPLOSION 1
-//       xplosions1.push(xplosion1)
-//       xplode1 = true;
-//       mainplayer.health -= enemies[i].damage
-//       enemies.splice(i,1)
-//     }
-//   }
-// }
-
 // POWER UPS
 function spaceLettucePowerUp() {
   for (var i = 0; i < powerups.length; i++) {
@@ -50,7 +32,7 @@ function spaceLettucePowerUp() {
   }
 
 // SHOOTING MECHANICS
-function shootEnemy() {
+function shootEnemy() { // for smaller enemies
   for (var i = 0; i < enemies.length; i++) {
     for (var j = 0; j < bullets.length; j++) {
       if (hasHit(enemies[i], bullets[j])  && isGameStart == true) { 
@@ -70,7 +52,7 @@ function shootEnemy() {
   }
 }
 
-function shootEnemy2() {
+function shootEnemy2() { // for larger enemies
   for (var i = 0; i < bigenemies.length; i++) {
     for (var j = 0; j < bullets.length; j++) {
       if (hasHit(bigenemies[i], bullets[j])  && isGameStart == true) { 

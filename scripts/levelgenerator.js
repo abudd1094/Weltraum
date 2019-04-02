@@ -99,7 +99,7 @@ function trumpAlert() {
   }
 }
 function spawnEnemy6() { // enemy 6 is Trump
-  if (gamelevel === 4  && isGameStart == true) {  
+  if (gamelevel >= 4  && isGameStart == true) {  
     if(frame % 80 === 0) {
       var xcor = Math.random() * (width - 20)
       var plusOrMinus = Math.random() < 0.5 ? -0.2 : 0.2;
@@ -118,7 +118,7 @@ function spawnEnemy6() { // enemy 6 is Trump
   }
 
   function spawnEnemy7() { // enemy 7 is also Trump
-    if (gamelevel === 4  && isGameStart == true) {  
+    if (gamelevel >= 4  && isGameStart == true) {  
       if((frame + 50) % 80 === 0) {
         var xcor = Math.random() * (width - 20)
         var plusOrMinus = Math.random() < 0.5 ? -0.2 : 0.2;

@@ -1,3 +1,5 @@
+// used for enemy death
+
 class Xplosion {
   constructor(x, y, width, height, speed) {
     // this.img = new Image()

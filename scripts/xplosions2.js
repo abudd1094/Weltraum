@@ -1,3 +1,5 @@
+// used for player death
+
 class Xplosion22 {
   constructor(x, y, width, height, speed) {
     // this.img = new Image()
