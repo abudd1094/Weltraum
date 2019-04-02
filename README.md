@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# Built for Ironhack Berlin Project 1
+# Ironhack Berlin Project 1
 - retro style vertical space shooter
 - first attempt at Canvas & JS
 
@@ -15,6 +14,6 @@
   - up & down increase & decrease speed
   - press SPACE BAR to fire (hold down for automatic fire - no movement allowed w full automatic fire) 
 - "m" key will activate game music
-=======
-Scripts are divided by Classes and Categorical interactions.
->>>>>>> f4ab0fd6dda697e5579af6e9f654156a5be2b0c2
+
+
+Designed & built by Alec Budd in January 2019
